@@ -247,7 +247,6 @@ namespace NguyenThiPhuongThao_51.Controllers
             bulkcopy.DestinationTableName = "SINHVIENs";
             bulkcopy.ColumnMappings.Add(0, "MaNV");
             bulkcopy.ColumnMappings.Add(1, "Hoten");
-            bulkcopy.ColumnMappings.Add(2, "MaPB");
             con.Open();
             bulkcopy.WriteToServer(dt);
             con.Close();
