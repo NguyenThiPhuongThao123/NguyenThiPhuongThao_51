@@ -88,7 +88,7 @@ namespace NguyenThiPhuongThao_51.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Masv,Hoten,Diachi,Malop")] NhanVien nhanVien)
+        public ActionResult Edit([Bind(Include = "MaNV,Hoten,MaPhongBan")] NhanVien nhanVien)
         {
             if (ModelState.IsValid)
             {
@@ -132,14 +132,14 @@ namespace NguyenThiPhuongThao_51.Controllers
             //chuyen file sang dang byte
             byte[] fileBytes = System.IO.File.ReadAllBytes(path + "fielexcel.xlsx"); //doan nay de file excel
             //ten file khi download ve
-            string fileName = "Sinhviencapnhat.xlsx";
+            string fileName = "NhanViencapnhat.xlsx";
             //tra ve file
             return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
         }
         public ActionResult UploadFile(HttpPostedFileBase file)
         {
             //dat ten cho file
-            string _FileName = "SINHVIEN.xls";
+            string _FileName = "NHANVIEN.xls";
             //duong dan luu file
             string _path = Path.Combine(Server.MapPath("~/Uploads/ExcelFile"), _FileName);
             //luu file len server
@@ -154,7 +154,6 @@ namespace NguyenThiPhuongThao_51.Controllers
                 NhanVien sv = new NhanVien();
                 sv.MaNV = dt.Rows[i][0].ToString();
                 sv.HoTen = dt.Rows[i][1].ToString();
-                sv.MaPhongBan = dt.Rows[i][2].ToString();
                 db.NhanViens.Add(sv);
                 db.SaveChanges();
             }
@@ -162,7 +161,6 @@ namespace NguyenThiPhuongThao_51.Controllers
             /* CopyDataByBulk(excel.ReadDataFromExcelFile(_path));*/
             return RedirectToAction("Index");
         }
-
         private void CopyDataByBulk(object v)
         {
             throw new NotImplementedException();
